@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="num.css">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <title>numerical</title>
+</head>
+<body>
+    <header class="header">
+        
+
+        <a href="#" class="logo"> <span id="sp"></span> numerical <span> Calculator </span> </a>
+        <nav class ="navigation">
+            
+            <a href="Review1.html" class="Contact">Review</a>
+        </nav>
+
+    </header>
+
+    <section>
+      
+        <div class="tab" style="margin-top: 70px;">
+            <button class="tablinks" onclick="openCity(event, 'Bisection')">Bisection</button>
+            <button class="tablinks" onclick="openCity(event, 'False_Position')">False_Position</button>
+            <button class="tablinks" onclick="openCity(event, 'Fixed_Point')">Fixed_Point</button>
+            <button class="tablinks" onclick="openCity(event, 'Newton')">Newton</button>
+            <button class="tablinks" onclick="openCity(event, 'Secant')">Secant</button>
+            <button class="tablinks" onclick="openCity(event, 'LU')">LU</button>
+            <script>
+            function openCity(evt, cityName) {
+              // Declare all variables
+              var i, tabcontent, tablinks;
+            
+              // Get all elements with class="tabcontent" and hide them
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+              }
+            
+              // Get all elements with class="tablinks" and remove the class "active"
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+            
+              // Show the current tab, and add an "active" class to the link that opened the tab
+              document.getElementById(cityName).style.display = "block";
+              evt.currentTarget.className += " active";
+            }</script>
+          </div>
+        </section>  
+
+        <!--===============================================
+        ==========               Bisection
+      ============
+    =======================================================-->
+        
+        
+
+
+
+        <section style="height: 800px;"> 
+          <div id="Bisection" class="tabcontent">
+            <h2>Bisection</h2>
+            <br>
+            <br>
+            <div class="inner">
+              <div align="center">
+                <header style="font-size: 150%;">Bisection method</header>
+                <div for="errormsg"></div>
+                <table class="input" align="center">
+                  <thead>
+                    <tr>
+                      <div for="mathfield" style="width:50%;">x^3+x-1</div>
+                      <div for="hidden" style="display:none;">x^3+x-1</div>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Xl: <input type="number" for="xl" value="0"></td>
+                      <td>Error: <input type="number" for="eps" value="0.5"></td>
+                    </tr>
+                    <tr>
+                      <td>Xu: <input type="number" for="xu" value="1"></td>
+                      <td>Max iterations: <input type="number" for="maxiter" value="10"></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td>Root = <label for="root"></label></td>
+                      <td></td>
+                    </tr>
+                  </tfoot>
+                </table>
+        
+                <button for="demo"
+                  onclick="x(mE.getValue()); clrtab(); bisection(xl.value, xu.value, eps.value);">Calculate</button>
+                <br>
+        
+                <table class="output" for="disp">
+                  <thead>
+                    <tr>
+                      <th>I</th>
+                      <th>Xl</th>
+                      <th>f(Xl)</th>
+                      <th>Xu</th>
+                      <th>f(Xu)</th>
+                      <th>Xr</th>
+                      <th>f(Xr)</th>
+                      <th>Error</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+        
+          </div>
+        
+          <!-- Sidebar -->
+         
+          <!-- Scripts -->
+          <script src="assets/js/jquery.min.js"></script>
+          <script src="assets/js/browser.min.js"></script>
+          <script src="assets/js/breakpoints.min.js"></script>
+          <script src="assets/js/util.js"></script>
+          <script src="assets/js/main.js"></script>
+          <script src="assets/js/math.js"></script>
+          <script src="assets/math/latex-to-js.js"></script>
+          <script src="assets/math/mathquill.js"></script>
+          <script src="assets/math/matheditor.js"></script>
+          <script> //Work-around for Chrome CORS support
+            var mE = new MathEditor('mathfield');
+        
+            function x(x) {
+              var span = document.getElementById('hidden');
+              z = latex_to_js(x);
+              span.innerHTML = z;
+              return x;
+            }	
+            
+          </script>
+            
+        
+        
+
+          <!--===============================================
+              ==========               False_Position
+                ============
+                =======================================================-->
+          
+          <div id="False_Position" class="tabcontent">
+            <h2>False_Position</h2>
+            <div class="inner">
+<!--
+              <div align="center">
+                <header style="font-size: 150%;">False position method</header>
+                <div ></div>
+                <table class="input">
+                  <thead>
+                    <tr>
+                      <div id="mathfield" style="width:50%;">-26 + 82.3*x - 88*x^2 + 45.4*x^3 - 9*x^4 + 0.65*x^5</div>
+                      <div id="hidden" style="display:none;">-26 + 82.3*x - 88*x^2 + 45.4*x^3 - 9*x^4 + 0.65*x^5</div>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Xl: <input type="number" id="xl" value="0.5"></td>
+                      <td>Error: <input type="number" id="eps" value="8">%</td>
+                    </tr>
+                    <tr>
+                      <td>Xu: <input type="number" id="xu" value="1"></td>
+                      <td>Max iterations: <input type="number" id="maxiter" value="10"></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td>Root = <label id="root"></label></td>
+                      <td> </td>
+                    </tr>
+                  </tfoot>
+                </table>
+        
+        
+                <button  onclick="x(mE.getValue()); clrtab(); falsepos(xl.value, xu.value, eps.value);">Calculate</button>
+                <br>
+        
+                <table class="output" >
+                  <thead>
+                    <tr>
+                      <th>I</th>
+                      <th>Xl</th>
+                      <th>f(Xl)</th>
+                      <th>Xu</th>
+                      <th>f(Xu)</th>
+                      <th>Xr</th>
+                      <th>f(Xr)</th>
+                      <th>Error</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+        
+          -->
+          </div>
+        
+          <!-- Sidebar -->
+          
+        
+        
+          <!-- Scripts -->
+          <script src="assets/js/jquery.min.js"></script>
+          <script src="assets/js/browser.min.js"></script>
+          <script src="assets/js/breakpoints.min.js"></script>
+          <script src="assets/js/util.js"></script>
+          <script src="assets/js/main.js"></script>
+          <script src="assets/js/math.js"></script>
+          <script src="assets/math/latex-to-js.js"></script>
+          <script src="assets/math/mathquill.js"></script>
+          <script src="assets/math/matheditor.js"></script>
+          <script> //Work-around for Chrome CORS support
+            var mE = new MathEditor('mathfield');
+            function x(x) {
+              var span = document.getElementById('hidden');
+              z = latex_to_js(x);
+              span.innerHTML = z;
+              return x;
+            }	
+        
+            
+        
+          </script>
+        
+
+
+            
+           
+
+
+
+            <!--===============================================
+                         ==========               Fixed_Point
+                ============
+                     =======================================================-->
+
+
+
+        
+        
+
+          <div id="Fixed_Point" class="tabcontent">
+            <h2>Fixed_Point</h2>
+            <br>
+            <br>
+            <form>
+                <label for="fx_fi">F(X)  </label><br>
+                <input type="text" id="fx_fi" name="fx_fi" placeholder="f(x)=" >
+                <br><br>
+
+                <label for="Xo_fi">Xo  </label><br>
+                <input type="number" id="Xo_fi" name="Xo_fi" placeholder="Xo = "><br><br>
+                
+
+                <label for="ebs_fi">Error </label><br>
+                <input type="number" id="ebs_fi" name="ebs_fi" placeholder="Error = ">
+                <br><br>
+
+                <button type="button" onclick="document.write(bisection())">Solve</button>
+
+
+                
+                <br><br>
+                <p id="XR_fi"></p>
+                
+              </form>
+          </div>
+
+
+
+          <!--===============================================
+              ==========               Newton
+               ============
+                    =======================================================-->
+
+          <div id="Newton" class="tabcontent">
+            <h2>Newton</h2>
+            <br>
+            <br>
+            <form>
+                <label for="fx_n">F(X)  </label><br>
+                <input type="text" id="fx_n" name="fx_n" placeholder="f(x)=" >
+                <br><br>
+
+                <label for="f'x_n">F'(x)  </label><br>
+                <input type="number" id="f'x_n" name="f'x_n" placeholder="F'(x)  = "><br><br>
+                
+                <label for="Xo_n">Xo  </label><br>
+                <input type="number" id="Xo_n" name="Xo_n" placeholder="Xo = ">
+                <br><br>
+
+                <label for="ebs_n">Error </label><br>
+                <input type="number" id="ebs_n" name="ebs_n" placeholder="Error = ">
+                <br><br>
+
+                <button type="button" onclick="document.write(bisection())">Solve</button>
+
+
+                
+                <br><br>
+                <p id="XR_n"></p>
+                
+              </form>
+          </div>
+
+
+          <!--===============================================
+             ==========               Secant
+              ============
+              =======================================================-->
+
+          <div id="Secant" class="tabcontent">
+            <h2>Secant</h2>
+            <br>
+            <br>
+            <form>
+                <label for="fx_s">F(X)  </label><br>
+                <input type="text" id="fx_s" name="fx_s" placeholder="f(x)=" >
+                <br><br>
+
+                <label for="X-1_s">X-1  </label><br>
+                <input type="number" id="X-1_s" name="X-1_s" placeholder="X-1 = "><br><br>
+                
+                <label for="Xo_s">Xo  </label><br>
+                <input type="number" id="Xo_s" name="Xo_s" placeholder="Xo = ">
+                <br><br>
+
+                <label for="ebs_s">Error </label><br>
+                <input type="number" id="ebs_s" name="ebs_s" placeholder="Error = ">
+                <br><br>
+
+                <button type="button" onclick="document.write(bisection())">Solve</button>
+
+
+                
+                <br><br>
+                <p id="XR_s"></p>
+                
+              </form>
+          </div>
+
+
+
+          <!--===============================================
+                ==========               LU
+            ============
+                =======================================================-->
+
+          <div id="LU" class="tabcontent">
+            <h2>LU</h2>
+            <br>
+            <br>
+
+          </div>
+          
+          
+
+
+         <!--===============================================
+                ==========               Fixed_Point
+            ============
+               =======================================================-->
+
+
+
+
+               <!--===============================================
+                ==========               Fixed_Point
+                ============
+                  =======================================================-->
+
+
+
+</div>
+         
+        </section>
+         <!--
+
+
+        <footer class="footer" style="top: 20000;">
+        <p class="footer-title" style="text-align: center;">Copyrights @ <span>2022</span>
+          <br><br>
+          <div>
+          <span style="color: aqua;">  Developed By  </span> <br>
+           Mark Roby <br> Marcelino Emad <br> Martina Tharwat
+          </div></p>
+        </footer>
+
+-->
+
+
+          <!--
+            <p class="footer-title">  </p>
+            <p class="footer-title"> Mark Roby <br> Marcelino Emad <br> Martina Tharwat </p>
+             <p class="footer-title"> Mark Roby <br> Marcelino Emad <br> Martina Tharwat </p>
+          -->
+      
+  
+
+
+
+       
+
+
+
+
+
+
+    
+    
+    
+</body>
+</html>
